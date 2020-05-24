@@ -105,6 +105,15 @@ Set to `1` to log debugging details from `protonvpn` to the container's stdout.
 
 Default: _empty_ (debug logging disabled)
 
+### `HOST_NETWORK`
+
+If you want to expose your proxy server to your local network, you need to
+specify that network in `HOST_NETWORK`, so that it can be routed back through
+your Docker network. E.g. if your LAN uses the 10.0.0.0/8 network, add
+`-e HOST_NETWORK=10.0.0.0/8` to your `docker run` command.
+
+Default: _empty_ (no network is routed)
+
 
 ## Pros and cons
 
