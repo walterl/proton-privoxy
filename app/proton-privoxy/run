@@ -25,5 +25,11 @@ chmod 0600 $PVDIR/pvpnpass
 protonvpn refresh
 protonvpn $PVPN_CMD_ARGS
 
+# Setup route for host network
+if [ -n $HOST_NETWORK ]; then
+	gw=$(ip route | awk '$1 == "default" { print $3 }')
+	ip route add $HOST_NETWORK via $gw
+fi
+
 # Start Privoxy
 exec privoxy --no-daemon

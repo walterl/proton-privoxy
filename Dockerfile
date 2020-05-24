@@ -1,5 +1,6 @@
 FROM alpine:3.11
 LABEL maintainer="Walter Leibbrandt"
+LABEL version="0.2"
 
 EXPOSE 8080
 
@@ -9,6 +10,7 @@ ENV PVPN_TIER=2
 ENV PVPN_PROTOCOL=udp
 ENV PVPN_CMD_ARGS="connect --fastest"
 ENV PVPN_DEBUG=
+ENV HOST_NETWORK=
 
 COPY app /app
 COPY pvpn-cli /root/.pvpn-cli
