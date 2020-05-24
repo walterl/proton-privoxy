@@ -20,6 +20,29 @@ docker run -d \
      --name proton-privoxy walt3rl/proton-privoxy
 ```
 
+Or with this `docker-compose.yml`:
+
+```yaml
+---
+version: "3"
+services:
+  proton-privoxy:
+    image: walt3rl/proton-privoxy
+    container_name: proton-privoxy
+    environment:
+      - PVPN_USERNAME=xxxxxxxxxxxxxxxxxxxxxxxx
+      - PVPN_PASSWORD=xxxxxxxxxxxxxxxxxxxxxxxx
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8888:8080
+    restart: unless-stopped
+    devices:
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+```
+
 This will start a Docker container that
 
 1. initializes a `protonvpn` CLI configuration
