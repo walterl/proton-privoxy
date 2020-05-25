@@ -25,6 +25,11 @@ chmod 0600 $PVDIR/pvpnpass
 protonvpn refresh
 protonvpn $PVPN_CMD_ARGS
 
+if ! ip link show proton0 > /dev/null; then
+	echo "Failed to bring up VPN :("
+	exit 1
+fi
+
 # Setup route for host network
 if [ -n $HOST_NETWORK ]; then
 	gw=$(ip route | awk '$1 == "default" { print $3 }')
