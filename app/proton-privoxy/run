@@ -2,7 +2,7 @@
 
 PVDIR=/root/.pvpn-cli
 
-if [ -z "$PVPN_USERNAME" -o -z "$PVPN_PASSWORD" ]; then
+if [ -z "$PVPN_USERNAME" ] || [ -z "$PVPN_PASSWORD" ]; then
 	echo "PVPN_USERNAME and/or PVPN_PASSWORD not set!"
 	exit 1
 fi
@@ -17,8 +17,8 @@ if [ ! -f $PVDIR/pvpn-cli.cfg ]; then
 		$PVDIR/pvpn-cli.cfg
 fi
 
-echo $PVPN_USERNAME > $PVDIR/pvpnpass
-echo $PVPN_PASSWORD >> $PVDIR/pvpnpass
+echo "$PVPN_USERNAME" > $PVDIR/pvpnpass
+echo "$PVPN_PASSWORD" >> $PVDIR/pvpnpass
 chmod 0600 $PVDIR/pvpnpass
 
 # Connect to ProtonVPN
@@ -31,9 +31,9 @@ if ! ip link show proton0 > /dev/null; then
 fi
 
 # Setup route for host network
-if [ -n $HOST_NETWORK ]; then
+if [ -n "$HOST_NETWORK" ]; then
 	gw=$(ip route | awk '$1 == "default" { print $3 }')
-	ip route add $HOST_NETWORK via $gw
+	ip route add "$HOST_NETWORK" via "$gw"
 fi
 
 # Start Privoxy
