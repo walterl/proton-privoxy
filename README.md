@@ -56,6 +56,40 @@ Test:
 curl --proxy http://127.0.0.1:8888 https://ipinfo.io/ip
 ```
 
+
+## Features
+
+### Multiple VPN connections on the same machine
+
+While not impossible, it is quite the networking feat to route traffic over
+specific VPN connections. With this Docker image you can run multiple
+containers, each setting up a different VPN connection _which doesn't affect
+your host's networking_. Routing traffic over a specific VPN connection is then
+as simple as configuring a target application's proxy server.
+
+### Share a VPN connection between devices on your LAN
+
+Run a container on one machine, and configure multiple devices on your network
+to connect to its proxy server. All connections that use that proxy server will
+be routed over the same VPN connection.
+
+### Free privacy filtering, courtesy of [Privoxy](https://www.privoxy.org/)
+
+Why did I choose Privoxy? Mostly because it's the simplest HTTP proxy to
+configure, that I've used before.
+
+### ~[Anti-feature] ProtonVPN's DNS leak protection doesn't work~
+
+**UPDATE:** This is no longer an issue, because Docker now allows
+`/etc/resolv.conf` to be updated while a container is running. It's recreated
+by Docker on container restart, but that doesn't matter, since ProtonVPN (and
+`DNS_SERVERS_OVERRIDE`) will modify it during startup.
+
+~Docker prevents containers from changing the servers used for DNS lookups, after startup. This prevents ProtonVPN from using its own leak protecting DNS server. In fact, at the moment it causes a non-fatal error in `protonvpn`.~
+
+~Ensure that you're using privacy respecting DNS servers on your Docker host, or manually specify secure servers for the container via [`--dns` options](https://docs.docker.com/config/containers/container-networking/#dns-services).~
+
+
 ## Configuration
 
 You can set any of the following container environment variables with
@@ -121,36 +155,3 @@ ProtonVPN. For example, to use Quad9 DNS servers, set
 `DNS_SERVERS_OVERRIDE=9.9.9.9,149.112.112.112`.
 
 Default: _empty_ (ProtonVPN's DNS server is used)
-
-
-## Features
-
-### Multiple VPN connections on the same machine
-
-While not impossible, it is quite the networking feat to route traffic over
-specific VPN connections. With this Docker image you can run multiple
-containers, each setting up a different VPN connection _which doesn't affect
-your host's networking_. Routing traffic over a specific VPN connection is then
-as simple as configuring a target application's proxy server.
-
-### Share a VPN connection between devices on your LAN
-
-Run a container on one machine, and configure multiple devices on your network
-to connect to its proxy server. All connections that use that proxy server will
-be routed over the same VPN connection.
-
-### Free privacy filtering, courtesy of [Privoxy](https://www.privoxy.org/)
-
-Why did I choose Privoxy? Mostly because it's the simplest HTTP proxy to
-configure, that I've used before.
-
-### ~[Anti-feature] ProtonVPN's DNS leak protection doesn't work~
-
-**UPDATE:** This is no longer an issue, because Docker now allows
-`/etc/resolv.conf` to be updated while a container is running. It's recreated
-by Docker on container restart, but that doesn't matter, since ProtonVPN (and
-`DNS_SERVERS_OVERRIDE`) will modify it during startup.
-
-~Docker prevents containers from changing the servers used for DNS lookups, after startup. This prevents ProtonVPN from using its own leak protecting DNS server. In fact, at the moment it causes a non-fatal error in `protonvpn`.~
-
-~Ensure that you're using privacy respecting DNS servers on your Docker host, or manually specify secure servers for the container via [`--dns` options](https://docs.docker.com/config/containers/container-networking/#dns-services).~
