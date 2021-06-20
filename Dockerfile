@@ -1,6 +1,6 @@
-FROM alpine:3.11
+FROM alpine:3.14
 LABEL maintainer="Walter Leibbrandt"
-LABEL version="0.2"
+LABEL version="0.3"
 
 EXPOSE 8080
 
@@ -17,6 +17,7 @@ COPY app /app
 COPY pvpn-cli /root/.pvpn-cli
 
 RUN apk --update add coreutils openvpn privoxy procps python3 runit \
+	&& python3 -m ensurepip \
 	&& pip3 install protonvpn-cli
 
 CMD ["runsvdir", "/app"]
