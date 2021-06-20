@@ -114,6 +114,14 @@ your Docker network. E.g. if your LAN uses the 10.0.0.0/8 network, add
 
 Default: _empty_ (no network is routed)
 
+### `DNS_SERVERS_OVERRIDE`
+
+Comma-separated list of DNS servers to use, overriding whatever was set by
+ProtonVPN. For example, to use Quad9 DNS servers, set
+`DNS_SERVERS_OVERRIDE=9.9.9.9,149.112.112.112`.
+
+Default: _empty_ (ProtonVPN's DNS server is used)
+
 
 ## Pros and cons
 
@@ -136,11 +144,13 @@ be routed over the same VPN connection.
 Why did I choose Privoxy? Mostly because it's the simplest HTTP proxy to
 configure, that I've used before.
 
-### Con: ProtonVPN's DNS leak protection doesn't work
+### ~Con: ProtonVPN's DNS leak protection doesn't work~
 
-Docker prevents containers from changing the servers used for DNS lookups,
-after startup. This prevents ProtonVPN from using its own leak protecting DNS
-server. In fact, at the moment it causes a non-fatal error in `protonvpn`.
+**UPDATE:** This is no longer an issue, because Docker now allows
+`/etc/resolv.conf` to be updated while a container is running. It's recreated
+by Docker on container restart, but that doesn't matter, since ProtonVPN (and
+`DNS_SERVERS_OVERRIDE`) will modify it during startup.
 
-Ensure that you're using privacy respecting DNS servers on your Docker host, or
-manually specify secure servers for the container via [`--dns` options](https://docs.docker.com/config/containers/container-networking/#dns-services).
+~Docker prevents containers from changing the servers used for DNS lookups, after startup. This prevents ProtonVPN from using its own leak protecting DNS server. In fact, at the moment it causes a non-fatal error in `protonvpn`.~
+
+~Ensure that you're using privacy respecting DNS servers on your Docker host, or manually specify secure servers for the container via [`--dns` options](https://docs.docker.com/config/containers/container-networking/#dns-services).~

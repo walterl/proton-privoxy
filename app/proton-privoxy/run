@@ -30,6 +30,13 @@ if ! ip link show proton0 > /dev/null; then
 	exit 1
 fi
 
+if [ -n "$DNS_SERVERS_OVERRIDE" ]; then
+	# This needs to run at this point, because ProtonVPN will have changed the
+	# DNS servers in /etc/resolv.conf.
+	cp /etc/resolv.conf /etc/resolv.conf.bak
+	echo "$DNS_SERVERS_OVERRIDE" | sed -e 's/^/nameserver /' -e 's/,/\nnameserver /' > /etc/resolv.conf
+fi
+
 # Setup route for host network
 if [ -n "$HOST_NETWORK" ]; then
 	gw=$(ip route | awk '$1 == "default" { print $3 }')

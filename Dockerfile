@@ -4,13 +4,14 @@ LABEL version="0.2"
 
 EXPOSE 8080
 
-ENV PVPN_USERNAME=
-ENV PVPN_PASSWORD=
-ENV PVPN_TIER=2
-ENV PVPN_PROTOCOL=udp
-ENV PVPN_CMD_ARGS="connect --fastest"
-ENV PVPN_DEBUG=
-ENV HOST_NETWORK=
+ENV PVPN_USERNAME= \
+    PVPN_PASSWORD= \
+    PVPN_TIER=2 \
+    PVPN_PROTOCOL=udp \
+    PVPN_CMD_ARGS="connect --fastest" \
+    PVPN_DEBUG= \
+    HOST_NETWORK= \
+    DNS_SERVERS_OVERRIDE=
 
 COPY app /app
 COPY pvpn-cli /root/.pvpn-cli
