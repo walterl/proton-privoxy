@@ -107,10 +107,10 @@ The value must be the number corresponding to your tier from the following
 list (from `protonvpn init`):
 
 ```
-1) Free
-2) Basic
-3) Plus
-4) Visionary
+0) Free
+1) Basic
+2) Plus
+3) Visionary
 ```
 
 Default: `2`
