@@ -1,5 +1,5 @@
 confdir /app/proton-privoxy
-
+logdir /var/log/privoxy
 listen-address  0.0.0.0:8080
 
 #debug   1    # show each GET/POST/CONNECT request
