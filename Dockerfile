@@ -1,6 +1,6 @@
 FROM alpine:3.14
 LABEL maintainer="Walter Leibbrandt"
-LABEL version="0.3"
+LABEL version="0.4"
 
 EXPOSE 8080
 
