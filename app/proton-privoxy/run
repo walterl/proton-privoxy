@@ -44,4 +44,5 @@ if [ -n "$HOST_NETWORK" ]; then
 fi
 
 # Start Privoxy
+ln -s /etc/privoxy/templates /app/proton-privoxy/
 exec privoxy --no-daemon
