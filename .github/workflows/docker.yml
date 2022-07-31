@@ -37,15 +37,3 @@ jobs:
           tags: |
             walt3rl/proton-privoxy:latest
             walt3rl/proton-privoxy:0.4.1
-      - name: Build and push alpine 3.12
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
-          push: true
-          build-args: |
-            ALPINE_VERSION=3.12
-          tags: |
-            walt3rl/proton-privoxy:latest-alpine-3.12
-            walt3rl/proton-privoxy:0.4.1-alpine-3.12
