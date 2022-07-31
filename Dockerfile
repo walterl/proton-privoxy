@@ -1,11 +1,13 @@
 FROM alpine:3.14
 LABEL maintainer="Walter Leibbrandt"
-LABEL version="0.4"
+LABEL version="0.4.1"
 
 EXPOSE 8080
 
 ENV PVPN_USERNAME= \
+    PVPN_USERNAME_FILE= \
     PVPN_PASSWORD= \
+    PVPN_PASSWORD_FILE= \
     PVPN_TIER=2 \
     PVPN_PROTOCOL=udp \
     PVPN_CMD_ARGS="connect --fastest" \
@@ -17,7 +19,7 @@ COPY app /app
 COPY pvpn-cli /root/.pvpn-cli
 
 RUN apk --update add coreutils openvpn privoxy procps python3 runit \
-	&& python3 -m ensurepip \
-	&& pip3 install protonvpn-cli
+    && python3 -m ensurepip \
+    && pip3 install protonvpn-cli
 
 CMD ["runsvdir", "/app"]

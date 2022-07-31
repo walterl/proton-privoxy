@@ -2,10 +2,18 @@
 
 PVDIR=/root/.pvpn-cli
 
-if [ -z "$PVPN_USERNAME" ] || [ -z "$PVPN_PASSWORD" ]; then
-	echo "PVPN_USERNAME and/or PVPN_PASSWORD not set!"
+if [ -z "$PVPN_USERNAME" ] && [ -z "$PVPN_USERNAME_FILE" ]; then
+	echo "Error: Either env var \$PVPN_USERNAME or \$PVPN_USERNAME_FILE is required."
 	exit 1
 fi
+
+if [ -z "$PVPN_PASSWORD" ] && [ -z "$PVPN_PASSWORD_FILE" ]; then
+	echo "Error: Either env var \$PVPN_PASSWORD or \$PVPN_PASSWORD_FILE is required."
+	exit 1
+fi
+
+[ -f "$PVPN_USERNAME_FILE" ] && PVPN_USERNAME=$(cat "$PVPN_USERNAME_FILE")
+[ -f "$PVPN_PASSWORD_FILE" ] && PVPN_PASSWORD=$(cat "$PVPN_PASSWORD_FILE")
 
 # Initialize config
 if [ ! -f $PVDIR/pvpn-cli.cfg ]; then
@@ -23,6 +31,7 @@ chmod 0600 $PVDIR/pvpnpass
 
 # Connect to ProtonVPN
 protonvpn refresh
+# shellcheck disable=SC2086
 protonvpn $PVPN_CMD_ARGS
 
 if ! ip link show proton0 > /dev/null; then
