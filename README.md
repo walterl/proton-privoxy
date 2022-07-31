@@ -100,6 +100,9 @@ You can set any of the following container environment variables with
 **Required.** This is your ProtonVPN OpenVPN username and password. It's the
 username and password you would normally provide to `protonvpn init`.
 
+If you're using [Docker Secrets](https://docs.docker.com/engine/swarm/secrets/#build-support-for-docker-secrets-into-your-images), you can use `PVPN_USERNAME_FILE` and
+`PVPN_PASSWORD_FILE` instead.
+
 ### `PVPN_TIER`
 
 Your ProtonVPN account tier, called "your ProtonVPN Plan" in `protonvpn init`.
