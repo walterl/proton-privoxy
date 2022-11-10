@@ -1,5 +1,16 @@
 #!/bin/sh
 
+# fix /dev/net/tun not working with docker swarm
+# Create the necessary file structure for /dev/net/tun
+if ( [ ! -c /dev/net/tun ] ); then
+  if ( [ ! -d /dev/net ] ); then
+    mkdir -m 755 /dev/net
+  fi
+  mknod /dev/net/tun c 10 200
+  chmod 0755 /dev/net/tun
+  echo "Created /dev/net/tun."
+fi
+
 PVDIR=/root/.pvpn-cli
 
 if [ -z "$PVPN_USERNAME" ] && [ -z "$PVPN_USERNAME_FILE" ]; then
