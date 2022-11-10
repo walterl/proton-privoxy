@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#docker build -t walt3rl/proton-privoxy:0.4.1-dev ../..
+#docker build -t walt3rl/proton-privoxy:0.4.2-dev ../..
 docker-compose up -d
 pvpnpass=$(docker-compose exec proton-privoxy cat /root/.pvpn-cli/pvpnpass)
 docker-compose down

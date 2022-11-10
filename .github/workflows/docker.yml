@@ -36,4 +36,4 @@ jobs:
           push: true
           tags: |
             walt3rl/proton-privoxy:latest
-            walt3rl/proton-privoxy:0.4.1
+            walt3rl/proton-privoxy:0.4.2
