@@ -78,7 +78,7 @@ be routed over the same VPN connection.
 Why did I choose Privoxy? Mostly because it's the simplest HTTP proxy to
 configure, that I've used before.
 
-### Built-in Killswitch
+### Built-in killswitch
 On startup, permanent killswitch ensures all connections use the protonvpn interface.
 
 ## Configuration
