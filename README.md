@@ -144,7 +144,7 @@ Default: _empty_ (debug logging disabled)
 
 ### `PVPN_KILL`
 
-Set to `0` to disable permanent kill switch.
+Set to `0` to disable permanent kill switch. May have unexpected outcome when used with protonvpn killswitch.
 
 Default: `1` (killswitch enabled)
 
