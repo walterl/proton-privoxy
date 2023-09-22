@@ -70,4 +70,4 @@ fi
 
 # Start Privoxy
 ln -s /etc/privoxy/templates /app/proton-privoxy/
-exec su privoxyu -c 'privoxy --no-daemon;'
+exec su privoxyu -c 'privoxy --no-daemon'

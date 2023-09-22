@@ -146,7 +146,7 @@ Default: _empty_ (debug logging disabled)
 
 Set to `0` to disable permanent kill switch.
 
-Default: `1` (debug logging disabled)
+Default: `1` (killswitch enabled)
 
 ### `HOST_NETWORK`
 
