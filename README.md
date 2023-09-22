@@ -142,6 +142,12 @@ Set to `1` to log debugging details from `protonvpn` to the container's stdout.
 
 Default: _empty_ (debug logging disabled)
 
+### `PVPN_KILL`
+
+Set to `0` to disable permanent kill switch.
+
+Default: `1` (debug logging disabled)
+
 ### `HOST_NETWORK`
 
 If you want to expose your proxy server to your local network, you need to
@@ -158,3 +164,4 @@ ProtonVPN. For example, to use Quad9 DNS servers, set
 `DNS_SERVERS_OVERRIDE=9.9.9.9,149.112.112.112`.
 
 Default: _empty_ (ProtonVPN's DNS server is used)
+

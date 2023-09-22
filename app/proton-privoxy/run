@@ -45,7 +45,7 @@ protonvpn refresh
 # shellcheck disable=SC2086
 protonvpn $PVPN_CMD_ARGS
 
-if ! ip link show proton0 > /dev/null; then
+if ! ip link show proton0 &> /dev/null; then
 	echo "Failed to bring up VPN :("
 	exit 1
 fi
@@ -63,6 +63,11 @@ if [ -n "$HOST_NETWORK" ]; then
 	ip route add "$HOST_NETWORK" via "$gw"
 fi
 
+# Set Killswitch
+if [ $PVPN_KILL -eq 1 ]
+nft -f $PVDIR/killswitch.conf
+fi
+
 # Start Privoxy
 ln -s /etc/privoxy/templates /app/proton-privoxy/
-exec privoxy --no-daemon
+exec su privoxyu -c 'privoxy --no-daemon;'
