@@ -64,7 +64,7 @@ if [ -n "$HOST_NETWORK" ]; then
 fi
 
 # Set Killswitch
-if [ $PVPN_KILL -eq 1 ]
+if [ $PVPN_KILL -eq 1 ]; then
 nft -f $PVDIR/killswitch.conf
 fi
 
