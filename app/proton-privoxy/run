@@ -65,7 +65,7 @@ fi
 
 # Set Killswitch
 if [ $PVPN_KILL -eq 1 ]; then
-nft -f $PVDIR/killswitch.conf
+	nft -f $PVDIR/killswitch.conf
 fi
 
 # Start Privoxy
