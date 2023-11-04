@@ -1,7 +1,7 @@
 version: "3"
 services:
   proton-privoxy:
-    image: walt3rl/proton-privoxy:0.4.2-dev
+    image: walt3rl/proton-privoxy:0.5.0-dev
     container_name: proton-privoxy
     environment:
       - PVPN_USERNAME_FILE=/test/creds/username

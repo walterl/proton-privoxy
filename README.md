@@ -89,6 +89,8 @@ by Docker on container restart, but that doesn't matter, since ProtonVPN (and
 
 ~Ensure that you're using privacy respecting DNS servers on your Docker host, or manually specify secure servers for the container via [`--dns` options](https://docs.docker.com/config/containers/container-networking/#dns-services).~
 
+### Built-in killswitch
+On startup, permanent killswitch ensures all connections use the protonvpn interface.
 
 ## Configuration
 
@@ -142,6 +144,12 @@ Set to `1` to log debugging details from `protonvpn` to the container's stdout.
 
 Default: _empty_ (debug logging disabled)
 
+### `PVPN_KILL`
+
+Set to `0` to disable permanent kill switch. May have unexpected outcome when used with protonvpn killswitch.
+
+Default: `1` (killswitch enabled)
+
 ### `HOST_NETWORK`
 
 If you want to expose your proxy server to your local network, you need to
@@ -158,3 +166,4 @@ ProtonVPN. For example, to use Quad9 DNS servers, set
 `DNS_SERVERS_OVERRIDE=9.9.9.9,149.112.112.112`.
 
 Default: _empty_ (ProtonVPN's DNS server is used)
+
