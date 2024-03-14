@@ -19,8 +19,10 @@ ENV PVPN_USERNAME= \
 COPY app /app
 COPY pvpn-cli /root/.pvpn-cli
 
-RUN apk --update add coreutils openvpn privoxy procps python3 runit \
+RUN apk --update add coreutils openvpn privoxy procps python3 runit git \
     && python3 -m ensurepip \
-    && pip3 install protonvpn-cli
+    && git clone https://github.com/ProtonVPN/linux-cli-community \
+    && cd linux-cli-community \
+    && pip3 install -e .
 
 CMD ["runsvdir", "/app"]
