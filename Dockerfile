@@ -5,6 +5,7 @@ LABEL version="0.4.2"
 
 EXPOSE 8080
 
+ARG PVPN_CLI_VER=2.2.12
 ENV PVPN_USERNAME= \
     PVPN_USERNAME_FILE= \
     PVPN_PASSWORD= \
@@ -21,8 +22,6 @@ COPY pvpn-cli /root/.pvpn-cli
 
 RUN apk --update add coreutils openvpn privoxy procps python3 runit git \
     && python3 -m ensurepip \
-    && git clone https://github.com/ProtonVPN/linux-cli-community \
-    && cd linux-cli-community \
-    && pip3 install -e .
+    && pip3 install git+https://github.com/Rafficer/linux-cli-community.git@v$PVPN_CLI_VER
 
 CMD ["runsvdir", "/app"]
