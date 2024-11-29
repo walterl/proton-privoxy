@@ -20,7 +20,7 @@ ENV PVPN_USERNAME= \
 COPY app /app
 COPY pvpn-cli /root/.pvpn-cli
 
-RUN apk --update add coreutils openvpn privoxy procps python3 runit git \
+RUN apk --update add coreutils openvpn ip6tables privoxy procps python3 runit git \
     && python3 -m ensurepip \
     && pip3 install git+https://github.com/Rafficer/linux-cli-community.git@v$PVPN_CLI_VER
 
