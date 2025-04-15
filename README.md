@@ -1,5 +1,11 @@
 # ProtonVPN Privoxy Docker
 
+⚠️ **Project status: Development suspended**
+
+See [this issue](https://github.com/walterl/proton-privoxy/issues/68) for details.
+
+---
+
 Docker container for setting up a [Privoxy](https://www.privoxy.org/) proxy that pushes traffic over a
 [ProtonVPN](https://protonvpn.com/) connection.
 
